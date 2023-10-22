@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { copy, linkIcon, loader, tick } from "../assets";
 import { useLazyGetSummaryQuery } from "../services/Article";
+import { WhatsappShareButton, TwitterShareButton, TelegramShareButton, TelegramIcon, FacebookShareButton } from "react-share";
+
+import { FaWhatsapp, FaTwitter, FaTelegram, FaFacebook } from 'react-icons/fa';
+
 
 const Demo = () => {
   const [article, setArticle] = useState({
@@ -24,6 +28,11 @@ const Demo = () => {
   //   setSample(data.summary);
 
   // }
+
+  const shareOnFacebook = (post) => {
+    const url = encodeURIComponent(`https://yourwebsite.com/posts/${post._id}`);
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+  };
 
   const getArticles = async () => {
     const options = {
@@ -169,7 +178,7 @@ const Demo = () => {
             </div>
             <input
               type="url"
-              placeholder="Enter an URL"
+              placeholder="Enter a URL"
               value={article.url}
               onChange={(e) => setArticle({ ...article, url: e.target.value })}
               onKeyDown={(e) => {
@@ -273,6 +282,24 @@ const Demo = () => {
                 <button className="article-copy-btn" onClick={handleCopyClick}>
                   <i class="fa-regular fa-copy"></i>
                 </button>
+                {/* share options */}
+                <div className="icons">
+                  <WhatsappShareButton url={article.summary}>
+                    <FaWhatsapp />
+                  </WhatsappShareButton>
+
+                  <TelegramShareButton url={article.summary}>
+                    <FaTelegram />
+                  </TelegramShareButton>
+
+                  <TwitterShareButton url={article.summary}>
+                    <FaTwitter />
+                  </TwitterShareButton>
+
+                  <FacebookShareButton quote={article.summary} url={`https://www.facebook.com/sharer/sharer.php?u=${article.summary}`}>
+                    <FaFacebook />
+                  </FacebookShareButton>
+                </div>
               </p>
             </div>
           </div>

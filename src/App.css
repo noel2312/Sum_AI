@@ -194,6 +194,17 @@ body {
   cursor: pointer;
 }
 
+.icons {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons > * {
+  font-size: 24px; /* Adjust the value to set the desired icon size */
+  margin-right: 8px; /* Adjust the value to control the spacing between icons */
+}
+
 .blue_gradient {
   font-weight: 900;
   background-image: linear-gradient(to right, #2196f3, #00bcd4);
